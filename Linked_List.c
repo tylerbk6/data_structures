@@ -11,7 +11,7 @@ struct Node {
 void PrintList(struct Node* head);
 void PrintBackwards( struct Node* head);
 void InsertFirst(int nData, struct Node* head);
-//void DeleteFirst(struct Node* head);
+void DeleteFirst(struct Node* head);
 
 int main(){  // Main is used to test functions
 
@@ -35,7 +35,7 @@ int main(){  // Main is used to test functions
     third->next=NULL;
 
     DeleteFirst(head);
-    printf("%d", head->data);
+//    printf("%d", head->data);
 
     PrintList(head);
 }
@@ -71,13 +71,15 @@ void InsertFirst(int nData, struct Node* head){ // Insert new node with nData fi
 }
 
 void DeleteFirst(struct Node* head){ // Delete the first element of list pointed to by head
-if (head != NULL){
-struct Node* toDelete=head;
-head = head->next;
-head->prev = NULL;
-free (toDelete);
+    if (head != NULL){
+        if (head-> next == NULL){
+            head = NULL;
+        }
+        else{
+            head->data = head->next->data;
+            head->prev = NULL;
+            head->next = head->next-> next;
+            free(head->next);
+        }
+    }
 }
-
-}
-
-
