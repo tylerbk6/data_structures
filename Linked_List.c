@@ -12,6 +12,7 @@ void PrintList(struct Node* head);
 void PrintBackwards( struct Node* head);
 void InsertFirst(int nData, struct Node* head);
 void DeleteFirst(struct Node* head);
+void deleteKey(int k, struct Node* head);
 
 int main(){  // Main is used to test functions
 
@@ -34,9 +35,9 @@ int main(){  // Main is used to test functions
     third->prev=second;
     third->next=NULL;
 
-    DeleteFirst(head);
+  
 //    printf("%d", head->data);
-
+   deleteKey(2,head);
     PrintList(head);
 }
 
@@ -82,4 +83,21 @@ void DeleteFirst(struct Node* head){ // Delete the first element of list pointed
             free(head->next);
         }
     }
+}
+
+// deleteKey: Delete first instance of key k
+
+void deleteKey(int k, struct Node* head){ 
+    if ( head != NULL){
+            struct Node* temp=head;
+            while (temp != NULL){
+                if (temp->data == k){
+                    temp->prev->next=temp->next;
+                    temp->next->prev = temp->prev;
+                    free(temp); 
+                }
+                temp=temp->next;
+            }
+
+    }     
 }
